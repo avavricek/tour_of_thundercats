@@ -1,16 +1,93 @@
 <h2>My Heroes</h2>
 
-<ul class="heroes">
-  <li *ngFor="let hero of heroes" (click)="onSelect(hero)" [class.selected]="hero === selectedHero">
+<!-- <div class="heroes"> -->
+  <!-- <li *ngFor="let hero of heroes" (click)="onSelect(hero)" [class.selected]="hero === selectedHero">
     <span class="hero-element">
       <span class="badge">{{hero.id}}</span> {{hero.name}}
     </span>
     <button class="delete-button" (click)="deleteHero(hero, $event)">Delete</button>
-  </li>
-</ul>
+  </li> -->
+        <kendo-grid
+            [data]="heroes"
+            [height]="410"
+            (cellClick)="onSelect($event)"
+            (add)="addHero($event)"
+            (remove)="removeHero($event)"
+            (save)="saveHero($event)"
+            (edit)="editHero($event)"
+        >
+                <ng-template kendoGridToolbarTemplate>
+                    <button kendoGridAddCommand>Add new</button>
+                </ng-template>
+            <kendo-grid-column
+                field="id"
+                title="ID"
+                width="40"
+            >
+                        <ng-template
+                            kendoGridEditTemplate
+                            let-dataItem="dataItem"
+                        >
+                            <input
+                                [(ngModel)]="dataItem.id"
+
+                                name="id"
+                                class="k-textbox"
+                                required
+                                disabled
+                            />
+                        </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column
+                field="name"
+                title="Name"
+                width="250"
+            >
+                        <ng-template
+                            kendoGridEditTemplate
+                            let-dataItem="dataItem"
+                        >
+                            <input
+                                [(ngModel)]="dataItem.name"
+                                kendoGridFocusable
+                                name="name"
+                                class="k-textbox"
+                                required
+                            />
+                        </ng-template>
+            </kendo-grid-column>
+                        <kendo-grid-command-column
+                            title="command"
+                            width="220"
+                        >
+                            <ng-template
+                                kendoGridCellTemplate
+                                let-isNew="isNew"
+                            >
+                                <button
+                                    kendoGridEditCommand
+                                    type="button"
+                                    [primary]="true"
+                                >Edit</button>
+                                <button
+                                    kendoGridRemoveCommand
+                                    type="button"
+                                >Remove</button>
+                                <button
+                                    kendoGridSaveCommand
+                                    type="button"
+                                >{{ isNew ? 'Add' : 'Update' }}</button>
+                                <button
+                                    kendoGridCancelCommand
+                                    type="button"
+                                >{{ isNew ? 'Discard changes' : 'Cancel' }}</button>
+                            </ng-template>
+                        </kendo-grid-command-column>
+        </kendo-grid>
+    <!-- </div> -->
 
 <div class="error" *ngIf="error">{{error}}</div>
-<button (click)="addHero()">Add New Hero</button>
+<!-- <button (click)="addHero()">Add New Hero</button> -->
 <div *ngIf="addingHero">
   <my-hero-detail (close)="close($event)"></my-hero-detail>
 </div>
@@ -19,26 +96,6 @@
   <h2>
     {{selectedHero.name | uppercase}} is my hero
   </h2>
+  <img [src]="selectedHero.filePath" alt="{{selectedHero.name}}">
   <button (click)="gotoDetail()">View Details</button>
-</div>
-
-<div>
-  <style>
-    .hidden { visibility: hidden}
-  </style>
-  <h4>ngFor Features</h4>
-  <button (click)="showNgFor=!showNgFor">{{showNgFor ? 'Hide' : 'Show'}} ngFor Features</button>
-  <table [class.hidden]="!showNgFor">
-    <tbody>
-      <tr *ngFor="let hero of heroes; let ix = index; let c = count; let e = even; let o = odd; let f = first; let l = last">
-        <td>{{hero.name}}</td>
-        <td>{{ix}}</td>
-        <td>{{c}}</td>
-        <td>{{e}}</td>
-        <td>{{o}}</td>
-        <td>{{f}}</td>
-        <td>{{l}}</td>
-      </tr>
-    </tbody>
-  </table>
 </div>

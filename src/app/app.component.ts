@@ -1,18 +1,22 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'my-root',
+  selector: "my-root",
   template: `
-    <h1>{{title}}</h1>
+    <h1>{{ title }}</h1>
     <div class="header-bar"></div>
-    <nav>
+    <!-- <nav>
       <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
       <a routerLink="/heroes" routerLinkActive="active">Heroes</a>
+    </nav> -->
+    <nav>
+      <button [routerLink]="['/dashboard']" kendoButton>Dashboard</button>
+      <button [routerLink]="['/heroes']" kendoButton>Heroes</button>
     </nav>
     <router-outlet></router-outlet>
   `,
-  styleUrls: ['./app.component.css']
+  styleUrls: ["./app.component.scss"],
 })
 export class AppComponent {
-  title = 'Tour of Heroes';
+  title = "Tour of Heroes";
 }

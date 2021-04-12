@@ -1,3 +1,5 @@
+@import '../styles.scss';
+
 [class*='col-'] {
   float: left;
 }
@@ -5,9 +7,6 @@
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
-}
-h3 {
-  text-align: center; margin-bottom: 0;
 }
 [class*='col-'] {
   padding-right: 20px;
@@ -26,21 +25,19 @@ h3 {
 .module {
 	padding: 20px;
 	text-align: center;
-	color: #eee;
+	color: $pale-spring-bud;
 	max-height: 120px;
 	min-width: 120px;
-	background-color: #607D8B;
-  background-color: rgb(0,120,215);
+	background-color: $olive-drab-7;
 	border-radius: 2px;
 }
 h4 {
   position: relative;
 }
 .module:hover {
-  background-color: #EEE;
-  background-color: #CCC;
+  background-color: $xanadu;
   cursor: pointer;
-  color: #607d8b;
+  color: $sage;
 }
 .grid-pad {
   padding: 10px 0;
@@ -64,4 +61,21 @@ h4 {
 	.module {
 	  min-width: 60px;
 	}
+}
+
+img {
+    position: relative;
+    &.image-on-hover {
+        will-change: opacity;
+        top:80px;
+        position: absolute;
+        right: 0px;
+        // object-fit: cover;
+        height: 100%;
+        transition: .5s ease;
+
+    }
+        &.image-on-hover:hover {
+            opacity: 0;
+        }
 }

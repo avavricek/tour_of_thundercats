@@ -1,11 +1,31 @@
 <div *ngIf="hero">
-  <h2>{{hero.name}} details!</h2>
-  <div>
-    <label>id: </label>{{hero.id}}</div>
-  <div>
-    <label>name: </label>
-    <input [(ngModel)]="hero.name" placeholder="name" />
-  </div>
-  <button (click)="goBack()">Back</button>
-  <button (click)="save()">Save</button>
+    <h2>{{hero.name}} details!</h2>
+    <div>
+        <div class="form-container">
+            <kendo-card>
+                <kendo-card-header class="k-hbox">
+                    <input
+                        [(ngModel)]="hero.name"
+                        placeholder="name"
+                    />
+
+                </kendo-card-header>
+                <img
+                    class="image-on-hover"
+                    src="{{hero.filePath}}"
+                    alt="{{hero.name}}"
+                >
+            </kendo-card>
+        </div>
+        <div class="button-container">
+            <button
+                kendoButton
+                (click)="goBack()"
+            >Back</button>
+            <button
+                kendoButton
+                (click)="save()"
+            >Save</button>
+        </div>
+    </div>
 </div>
